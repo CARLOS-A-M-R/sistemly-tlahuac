@@ -1,0 +1,16 @@
+fieldset {
+    background-color: #ffffff;
+    border: 3px solid #008000;
+}
+
+legend {
+    background-color: #6495ED;
+    border-color: #008040;
+    border: 4px;
+    color: dark;
+    padding: 5px 10px;
+}
+
+input {
+    margin: 5px;
+}

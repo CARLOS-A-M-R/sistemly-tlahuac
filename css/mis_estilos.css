@@ -1,0 +1,17 @@
+.label.bg-green {
+    background-color: #008000;
+}
+
+.label.bg-red {
+    background-color: #ff0000;
+}
+#btnagregar,#btnGuardar{
+    color: #ffff;
+    background-color: #00acff;
+
+}
+#btnCancelar{
+	 color: #ffff;
+    background-color: red;
+}
+
