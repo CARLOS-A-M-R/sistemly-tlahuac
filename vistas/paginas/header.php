@@ -51,7 +51,7 @@
 					<?php 
 					if(empty($_SESSION['validarIngreso'])){
 
-						header("Location:http://192.168.1.184/");
+						header("Location:https://sistemly.herokuapp.com/");
 						
 						//echo "<script>document.location = 'http://192.168.1.72/';</script>";
           

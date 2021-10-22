@@ -28,7 +28,7 @@ $(document).ready(function() {
                 data: false,
                 success: function() {
                     //console.log(data)
-                    document.location = 'http://192.168.1.184/';
+                    document.location = 'https://sistemly.herokuapp.com/';
                 },
                 error: function(error) {}
             });
