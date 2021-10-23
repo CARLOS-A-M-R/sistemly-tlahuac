@@ -46,8 +46,8 @@ class ControladorFormularios
 
      static public function ctrIngreso()
      {
-
-          if(isset($_POST["nombre"]))
+          
+          if(isset($_POST["nombre"]) || isset($_POST["g-recaptcha-response"]))
           {
                $tabla = "tbl_cuentas_usuarios";
                $tabla2 = "tbl_personal";     
@@ -58,7 +58,7 @@ class ControladorFormularios
 
                $encryptPassword = crypt($_POST['clave'], '$2a$07$asxx54ahjppf45sd87a5a4dDDGsystemdev$');
 
-               if($respuesta["tcu_nombre_cuenta"] === $_POST["nombre"] && $respuesta["tcu_clave_cuenta"] === $encryptPassword)
+               if($respuesta["tcu_nombre_cuenta"] === $_POST["nombre"] && $respuesta["tcu_clave_cuenta"] === $encryptPassword && $_POST["g-recaptcha-response"] > 0)
                {
                     ModeloFormularios::mdlActualizarIntentos($tabla, 0, $respuesta["tcu_nombre_cuenta"]);
 
@@ -79,18 +79,34 @@ class ControladorFormularios
                     
                     </script>';
 
-               }else{
+               } else{
 
+               
                     if ($respuesta['tcu_intentos_fails'] < 3) {
                          
                          $intentos = $respuesta["tcu_intentos_fails"] + 1;
 
                          ModeloFormularios::mdlActualizarIntentos($tabla, $intentos, $respuesta["tcu_nombre_cuenta"]);
-                    } else {
-                         echo '<div class="alert alert-warning">RECAPTCHA Debes validar que no eres un robot</div>';
-                    }
+                    
+                         if (!isset($_POST["g-recaptcha-response"]) || empty($_POST["g-recaptcha-response"])) {
 
-                        
+                              echo '<div class="alert alert-warning">RECAPTCHA Debes validar que no eres un robot</div>';
+
+                         } 
+                         if ($respuesta["tcu_nombre_cuenta"] !== $_POST["nombre"] || $respuesta["tcu_clave_cuenta"] !== $encryptPassword) {
+                         
+                              echo '<div class="alert alert-danger">
+                                        Error al ingresar al sistema, el nombre o la contraseña no coinciden
+                                   </div>'; 
+
+                    }
+               }
+                    else {
+                         
+                         echo '<div class="alert alert-danger">
+                                        Intentos superados. El máximo es de 3 intentos.
+                                   </div>'; 
+                    }
 
                          echo '<script>
                                    if(window.history.replaceState)
@@ -98,9 +114,7 @@ class ControladorFormularios
                                         window.history.replaceState(null,null,window.location.href);
                                    }
                                    </script>';    
-                         echo '<div class="alert alert-danger">
-                                   Error al ingresar al sistema, el nombre o la contraseña no coinciden
-                              </div>';          
+                                  
                }
               // echo '<prev>'; print_r($respuesta); echo '</prev>';
 

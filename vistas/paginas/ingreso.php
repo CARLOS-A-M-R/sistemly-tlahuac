@@ -55,6 +55,7 @@ function mostrarPassword(){
 	<link rel="stylesheet" href="../../fonts/monofont.ttf">
 	<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
 	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+	<script src="https://www.google.com/recaptcha/api.js" async defer></script>
 </head>
 <body class="cover" style="background-image: url(./assets/img/unnamed.jpg);">
 
@@ -103,14 +104,15 @@ function mostrarPassword(){
     <br>
 	<input type="text" id="captcha" name="captcha_challenge" pattern="[A-Z]{6}">
 </div> -->
-
+			<div class="g-recaptcha" data-sitekey="6LcYCescAAAAAB6AAxAC0yIfutNBmC4uPIbwr8Fi">
+            </div>
    
-<div class="form-group label-floating">
+		<div class="form-group label-floating">
 
 
 
 
-			<p><a href="#">olvide mi contraseña</a>
+			<p><a href="#">¿Olvidaste tu contraseña?</a>
 		</div>
 
 		<?php
@@ -121,11 +123,25 @@ function mostrarPassword(){
 		<div class="form-group text-center">
 
 			<!-- <input type="submit"  class="btn btn-raised btn-danger" value="Ingreso"/> -->
-			<button type="submit" class="btn btn-primary">Ingresar</button>
+			<button type="submit" class="btn btn-primary" style="color: #FFFFFF; background: red;">Ingresar</button>
 			
 		</div>
 
 	</form>
+	<div class="cards" id="cards" style="display: none;">
+	<div class="card text-white bg-danger mb-3">
+	<div class="card-header text-center">
+	¡AViso importante!
+	</div>
+	<div class="card-body">
+		<blockquote class="blockquote mb-0">
+		<p></p>
+		<footer class="blockquote-footer text-center text-white">Hemos detectado varios inicio de sesión incorrectos en su cuenta, <cite title="Source Title">Temporalmente su cuenta tendra inactividad por 15 minutos.</cite></footer>
+		</blockquote>
+	</div>
+	</div>	
+	</div>
+
 
 	
 	<!--====== Scripts -->
